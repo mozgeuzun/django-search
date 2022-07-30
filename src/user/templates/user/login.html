@@ -1,0 +1,19 @@
+
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html>
+<body>
+  <center>
+  <form method="POST" style="margin: auto;width: 500px;margin-top: 250px;">
+    {% csrf_token %}
+    <fieldset class="form-group">
+      {{ form|crispy}}
+    </fieldset>
+   <center>
+    <button class="btn btn-outline-info" type="submit"><span class="glyphicon glyphicon-log-in"></span> &nbsp; LOGIN</button>
+  </center>
+  <br/>
+  </form>
+</center>
+</body>
+</html>

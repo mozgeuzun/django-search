@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">  
+  <title>Student Records</title>  
+  {% load static %}   
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %} "/>  
+</head>
+
+<body >
+  <center>
+  <h1>WELCOME</h1> 
+  <a href="{% url 'logout2' %}">Enter for LOGOUT</a>
+</center>
+  <form id="myForm" method="post">
+    <h3>ADD STUDENT HERE:</h3>
+    {% csrf_token %}
+    First Name:<input type="text" id="fname" name="fname"/ placeholder="Student First Name"><br>
+    Last Name:<input type="text" id="lname" name="lname"/ placeholder="Student Last Name"><br>
+    Department:<input type="text" id="depart" name="depart"/ placeholder="Student Department"><br>
+    <button type="button" onclick="AddStudent()" >Add</button>
+  </form>
+<div id="container"></div>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+  axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+  axios.defaults.xsrfCookieName = "csrftoken";
+ function buildTable(container,list,titles) {
+    container.innerHTML = "";
+    var table = document.createElement("table");
+    var thead = document.createElement("thead");
+    var tbody = document.createElement("tbody");
+    table.appendChild(thead);
+    table.appendChild(tbody);
+    if ( list.length > 0 ) {
+      var tr = document.createElement("tr");
+      thead.appendChild(tr);
+      for(var k in titles) {
+        var th = document.createElement("th");
+        th.innerHTML = titles[k];
+        tr.appendChild(th);
+      }
+      for(var i=0; i<list.length; i++) {
+        var tr = document.createElement("tr");
+        tbody.appendChild(tr);
+        for(var k in list[i]) {
+          var td = document.createElement("td");
+          td.innerHTML = list[i][k];
+          tr.appendChild(td);         
+        }
+        var td = document.createElement("td");
+        var edit = document.createElement("button");
+        td.appendChild(edit);
+        tr.appendChild(td);
+        edit.rowdata = list[i];
+        edit.innerHTML = "X";
+        edit.onclick =function() {
+          handleDelete(this.rowdata[0]);
+        };
+       
+      }
+    }
+    container.appendChild(table);  
+ }
+ function listele() {
+  axios.get("user/liste")
+        .then(function (response) {         
+            buildTable(document.getElementById("container"),response.data,["Student ID","FIRST NAME","LAST NAME","DEPARTMENT"]);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+ }
+
+ function handleDelete(id) {
+    if (!confirm("Do you REALLY want to delete this person")) {
+      return;
+    }
+  axios.get("user/delete/"+id)
+        .then(function (response) {         
+            listele();
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+ }
+ function AddStudent() {
+    if (!confirm("Do you want to add this person?")) {
+      return;
+    }
+    const formData = new FormData((document.getElementById("myForm")));
+    var data = {
+      fnamestudent:formData.get("fname"),
+      lnamestudent:formData.get("lname"),
+      department:formData.get("depart"),
+    };
+    document.getElementById("myForm").reset();
+    console.log(data);
+    axios.post("user/add",data)
+    .then(function (response) {         
+            listele();
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    }
+  listele(); 
+</script>  
+</body>
+</html>
