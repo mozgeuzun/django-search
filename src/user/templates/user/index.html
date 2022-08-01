@@ -6,13 +6,26 @@
   <title>Student Records</title>  
   {% load static %}   
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %} "/>  
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style2.css' %} "/>  
 </head>
-
+<div id="navbar">
+  <a id="logo">WELCOME</a>
+  <div id="navbar-right">
+    <a class="active" href="{% url 'index' %}">Home</a>
+    <a href="#about">About</a>
+    <a href="{% url 'logout2' %}">Logout</a>   
+  </div>
+</div>
 <body >
-  <center>
-  <h1>WELCOME</h1> 
-  <a href="{% url 'logout2' %}">Enter for LOGOUT</a>
-</center>
+
+  <center><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+  <h1 style="text-align:center;"></h1>
+  <button class="tablink" onclick="openPage('Add', this, ' rgb(6, 107, 116)')">Add</button>
+  <button class="tablink" onclick="openPage('Delete', this, ' rgb(6, 107, 116)')" id="defaultOpen">Delete</button>
+  <button class="tablink" onclick="openPage('Edit', this, ' rgb(6, 107, 116)')">Edit</button>
+  <button class="tablink" onclick="openPage('container', this, ' rgb(6, 107, 116)')">See All</button>
+
+<div id="Add" class="tabcontent">
   <form id="myForm" method="post">
     <h3>ADD STUDENT HERE:</h3>
     {% csrf_token %}
@@ -21,7 +34,22 @@
     Department:<input type="text" id="depart" name="depart"/ placeholder="Student Department"><br>
     <button type="button" onclick="AddStudent()" >Add</button>
   </form>
-<div id="container"></div>
+</div>
+
+<div id="Delete" class="tabcontent">
+  <h3>Who Do You Want To Delete?</h3>
+  
+    </form>
+</div>
+
+<div id="Edit" class="tabcontent">
+
+</div>
+
+<div id="container" class="tabcontent"></div>
+</center>
+
+
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
   axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
@@ -106,6 +134,32 @@
         });
     }
   listele(); 
+  
+  window.onscroll = function() {scrollFunction()};
+  function scrollFunction() {
+    if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+      document.getElementById("navbar").style.padding = "30px 10px";
+       document.getElementById("logo").style.fontSize = "25px";
+  } else {
+      document.getElementById("navbar").style.padding = "80px 10px";
+      document.getElementById("logo").style.fontSize = "35px";
+  }
+}
+
+function openPage(pageName, elmnt, color) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].style.backgroundColor = "";
+  }
+  document.getElementById(pageName).style.display = "block";
+  elmnt.style.backgroundColor = color;
+}
+document.getElementById("defaultOpen").click();
 </script>  
 </body>
 </html>
