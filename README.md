@@ -15,7 +15,7 @@
 
 ## IMAGES 
 
+![Screenshot (72)](https://user-images.githubusercontent.com/76754183/182100015-aa3cc4e9-fa61-4c86-ae63-c4059ee4fa2b.png)
 
-![Screenshot (70)](https://user-images.githubusercontent.com/76754183/181945995-699e8a43-f814-4210-b9d1-e52958782638.png)
 
 -My Django project connects to the database and performs basic functions (login,logout,add, delete).
