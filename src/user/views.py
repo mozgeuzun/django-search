@@ -43,8 +43,8 @@ def Logout(request:request):
         del request.session["user"]
     return redirect('login')
 
-def liste(request: request):
-    l = db.liste()
+def liste(request: request,search:str=""):
+    l = db.liste(search)
     return HttpResponse(json.dumps(l))
 
 def delete(request:request,id):
