@@ -7,27 +7,24 @@
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %} "/>  
   <link rel="stylesheet" type="text/css" href="{% static 'css/style2.css' %} "/>  
 </head>
-
 <div id="navbar">
-  <a id="logo">BUNNYSEARCH</a>
+  <a id="logo">WELCOME</a>
   <div id="navbar-right">
     <a class="active" href="{% url 'index' %}">Home</a>
+    <a href="#about">About</a>
     <a href="{% url 'logout2' %}">Logout</a>   
   </div>
 </div>
-
 <body >
-  <center>
-    <br><br><br><br><br><br><br><br><br><br><br><br>
-    {% load static %} 
-          <img src="{% static 'media/bunny.jpg' %}" alt="home" width="400" height="200"/><br>
-          <input type="text" name="fnamestudent" id="fnamestudent">
-          <button type="button" value="Search" onclick="listele()">Search</button><br><br>
-          <button  type="button" onclick="Add()">Add</button>
-          <button type="button" onclick="Reset()">Reset</button>
-  </center>
-  
- <dialog id="dlg">
+
+  <center><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+  <h1 style="text-align:center;"></h1>
+  <button class="tablink" onclick="openPage('Add', this, ' rgb(6, 107, 116)')">Add</button>
+  <button class="tablink" onclick="openPage('Delete', this, ' rgb(6, 107, 116)')" id="defaultOpen">Delete</button>
+  <button class="tablink" onclick="openPage('Edit', this, ' rgb(6, 107, 116)')">Edit</button>
+  <button class="tablink" onclick="openPage('container', this, ' rgb(6, 107, 116)')">See All</button>
+
+<div id="Add" class="tabcontent">
   <form id="myForm" method="post">
     {% csrf_token %}
     First Name:<input type="text" id="fname" name="fname"/ placeholder="Student First Name"><br>
@@ -36,21 +33,22 @@
     <button type="button" onclick="AddStudent()" >Add</button>
     <button  type="button" onclick="Cancel()">Cancel</button>
   </form>
-</dialog>
+</div>
+
+<div id="Delete" class="tabcontent">
+  <h3>Who Do You Want To Delete?</h3>
+  
+    </form>
+</div>
+
+<div id="Edit" class="tabcontent">
+
+</div>
+
+<div id="container" class="tabcontent"></div>
+</center>
 
 
-<script>
-  function Add() {
-	var dlg=document.getElementById("dlg");
-    dlg.open = 1;
-}
-function Cancel() {
-  var dlg=document.getElementById("dlg");
-  dlg.open = 0;
-}
-
-</script>
-<center> <br><div id="container" ></div></center>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
   axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
@@ -142,14 +140,8 @@ function listele() {
             console.log(error);
         });
     }
-
-  function Reset(){
-    document.getElementById("fnamestudent").value='';
-    listele();
+  listele(); 
   
-}
-
-   
   window.onscroll = function() {scrollFunction()};
   function scrollFunction() {
     if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
@@ -160,7 +152,21 @@ function listele() {
       document.getElementById("logo").style.fontSize = "35px";
   }
 }
-listele();
+
+function openPage(pageName, elmnt, color) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].style.backgroundColor = "";
+  }
+  document.getElementById(pageName).style.display = "block";
+  elmnt.style.backgroundColor = color;
+}
+document.getElementById("defaultOpen").click();
 </script>  
 </body>
 </html>
