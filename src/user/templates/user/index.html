@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +7,29 @@
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %} "/>  
   <link rel="stylesheet" type="text/css" href="{% static 'css/style2.css' %} "/>  
 </head>
+<<<<<<< HEAD
+
+<div id="navbar">
+  <a id="logo">BUNNYSEARCH</a>
+  <div id="navbar-right">
+    <a class="active" href="{% url 'index' %}">Home</a>
+    <a href="{% url 'logout2' %}">Logout</a>   
+  </div>
+</div>
+
+<body >
+  <center>
+    <br><br><br><br><br><br><br><br><br><br><br><br>
+    {% load static %} 
+          <img src="{% static 'media/bunny.jpg' %}" alt="home" width="400" height="200"/><br>
+          <input type="text" name="fnamestudent" id="fnamestudent">
+          <button type="button" value="Search" onclick="listele()">Search</button><br><br>
+          <button  type="button" onclick="Add()">Add</button>
+          <button type="button" onclick="Reset()">Reset</button>
+  </center>
+  
+ <dialog id="dlg">
+=======
 <div id="navbar">
   <a id="logo">WELCOME</a>
   <div id="navbar-right">
@@ -26,14 +48,32 @@
   <button class="tablink" onclick="openPage('container', this, ' rgb(6, 107, 116)')">See All</button>
 
 <div id="Add" class="tabcontent">
+>>>>>>> da5454ab150cdfbc1d61e2374873eae79bcf8e43
   <form id="myForm" method="post">
-    <h3>ADD STUDENT HERE:</h3>
     {% csrf_token %}
     First Name:<input type="text" id="fname" name="fname"/ placeholder="Student First Name"><br>
     Last Name:<input type="text" id="lname" name="lname"/ placeholder="Student Last Name"><br>
     Department:<input type="text" id="depart" name="depart"/ placeholder="Student Department"><br>
     <button type="button" onclick="AddStudent()" >Add</button>
+    <button  type="button" onclick="Cancel()">Cancel</button>
   </form>
+<<<<<<< HEAD
+</dialog>
+
+
+<script>
+  function Add() {
+	var dlg=document.getElementById("dlg");
+    dlg.open = 1;
+}
+function Cancel() {
+  var dlg=document.getElementById("dlg");
+  dlg.open = 0;
+}
+
+</script>
+<center> <br><div id="container" ></div></center>
+=======
 </div>
 
 <div id="Delete" class="tabcontent">
@@ -50,6 +90,7 @@
 </center>
 
 
+>>>>>>> da5454ab150cdfbc1d61e2374873eae79bcf8e43
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
   axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
@@ -82,7 +123,7 @@
         td.appendChild(edit);
         tr.appendChild(td);
         edit.rowdata = list[i];
-        edit.innerHTML = "X";
+        edit.innerHTML = "Delete";
         edit.onclick =function() {
           handleDelete(this.rowdata[0]);
         };
@@ -91,10 +132,13 @@
     }
     container.appendChild(table);  
  }
- function listele() {
-  axios.get("user/liste")
+
+function listele() {
+  var ara = document.getElementById("fnamestudent").value;
+  axios.get(`user/liste${ara ? "/"+ara : ''}`)
         .then(function (response) {         
             buildTable(document.getElementById("container"),response.data,["Student ID","FIRST NAME","LAST NAME","DEPARTMENT"]);
+            
         })
         .catch(function (error) {
             console.log(error);
@@ -113,6 +157,11 @@
             console.log(error);
         });
  }
+
+
+
+
+
  function AddStudent() {
     if (!confirm("Do you want to add this person?")) {
       return;
@@ -133,8 +182,19 @@
             console.log(error);
         });
     }
+<<<<<<< HEAD
+
+  function Reset(){
+    document.getElementById("fnamestudent").value='';
+    listele();
+  
+}
+
+   
+=======
   listele(); 
   
+>>>>>>> da5454ab150cdfbc1d61e2374873eae79bcf8e43
   window.onscroll = function() {scrollFunction()};
   function scrollFunction() {
     if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
@@ -145,6 +205,9 @@
       document.getElementById("logo").style.fontSize = "35px";
   }
 }
+<<<<<<< HEAD
+listele();
+=======
 
 function openPage(pageName, elmnt, color) {
   var i, tabcontent, tablinks;
@@ -160,6 +223,7 @@ function openPage(pageName, elmnt, color) {
   elmnt.style.backgroundColor = color;
 }
 document.getElementById("defaultOpen").click();
+>>>>>>> da5454ab150cdfbc1d61e2374873eae79bcf8e43
 </script>  
 </body>
 </html>

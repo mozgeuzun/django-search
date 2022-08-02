@@ -1,4 +1,6 @@
 
+from cgi import print_form
+from tkinter.tix import Select
 from urllib import request
 import mysql.connector
 class db:
@@ -11,11 +13,13 @@ class db:
             database="testdb1"
         )
     @staticmethod
-    def liste():
+    def liste(search:str):
         conn = db.conn()
         mycursor = conn.cursor()
-
-        mycursor.execute("SELECT * FROM student")
+        print(search, type(search))
+        sql = "SELECT * FROM student WHERE (fnamestudent LIKE CONCAT('%','"+search+"','%') OR lnamestudent LIKE CONCAT('%','"+search+"','%'))"
+       
+        mycursor.execute(sql)
 
         myresult = mycursor.fetchall()
         mycursor.close()
@@ -46,4 +50,4 @@ class db:
         conn.close()
         print("ID",id)
         return id
-    
+   
