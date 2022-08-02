@@ -7,6 +7,32 @@
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %} "/>  
   <link rel="stylesheet" type="text/css" href="{% static 'css/style2.css' %} "/>  
 </head>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+<div id="navbar">
+  <a id="logo">BUNNYSEARCH</a>
+  <div id="navbar-right">
+    <a class="active" href="{% url 'index' %}">Home</a>
+    <a href="{% url 'logout2' %}">Logout</a>   
+  </div>
+</div>
+
+<body >
+  <center>
+    <br><br><br><br><br><br><br><br><br><br><br><br>
+    {% load static %} 
+          <img src="{% static 'media/bunny.jpg' %}" alt="home" width="400" height="200"/><br>
+          <input type="text" name="fnamestudent" id="fnamestudent">
+          <button type="button" value="Search" onclick="listele()">Search</button><br><br>
+          <button  type="button" onclick="Add()">Add</button>
+          <button type="button" onclick="Reset()">Reset</button>
+  </center>
+  
+ <dialog id="dlg">
+=======
+>>>>>>> 35f89d73490e193951341b4b50e4671208463432
 <div id="navbar">
   <a id="logo">WELCOME</a>
   <div id="navbar-right">
@@ -25,6 +51,10 @@
   <button class="tablink" onclick="openPage('container', this, ' rgb(6, 107, 116)')">See All</button>
 
 <div id="Add" class="tabcontent">
+<<<<<<< HEAD
+=======
+>>>>>>> da5454ab150cdfbc1d61e2374873eae79bcf8e43
+>>>>>>> 35f89d73490e193951341b4b50e4671208463432
   <form id="myForm" method="post">
     {% csrf_token %}
     First Name:<input type="text" id="fname" name="fname"/ placeholder="Student First Name"><br>
@@ -33,6 +63,26 @@
     <button type="button" onclick="AddStudent()" >Add</button>
     <button  type="button" onclick="Cancel()">Cancel</button>
   </form>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+</dialog>
+
+
+<script>
+  function Add() {
+	var dlg=document.getElementById("dlg");
+    dlg.open = 1;
+}
+function Cancel() {
+  var dlg=document.getElementById("dlg");
+  dlg.open = 0;
+}
+
+</script>
+<center> <br><div id="container" ></div></center>
+=======
+>>>>>>> 35f89d73490e193951341b4b50e4671208463432
 </div>
 
 <div id="Delete" class="tabcontent">
@@ -49,6 +99,10 @@
 </center>
 
 
+<<<<<<< HEAD
+=======
+>>>>>>> da5454ab150cdfbc1d61e2374873eae79bcf8e43
+>>>>>>> 35f89d73490e193951341b4b50e4671208463432
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
   axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
@@ -140,8 +194,24 @@ function listele() {
             console.log(error);
         });
     }
+<<<<<<< HEAD
   listele(); 
   
+=======
+<<<<<<< HEAD
+
+  function Reset(){
+    document.getElementById("fnamestudent").value='';
+    listele();
+  
+}
+
+   
+=======
+  listele(); 
+  
+>>>>>>> da5454ab150cdfbc1d61e2374873eae79bcf8e43
+>>>>>>> 35f89d73490e193951341b4b50e4671208463432
   window.onscroll = function() {scrollFunction()};
   function scrollFunction() {
     if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
@@ -152,6 +222,12 @@ function listele() {
       document.getElementById("logo").style.fontSize = "35px";
   }
 }
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+listele();
+=======
+>>>>>>> 35f89d73490e193951341b4b50e4671208463432
 
 function openPage(pageName, elmnt, color) {
   var i, tabcontent, tablinks;
@@ -167,6 +243,10 @@ function openPage(pageName, elmnt, color) {
   elmnt.style.backgroundColor = color;
 }
 document.getElementById("defaultOpen").click();
+<<<<<<< HEAD
+=======
+>>>>>>> da5454ab150cdfbc1d61e2374873eae79bcf8e43
+>>>>>>> 35f89d73490e193951341b4b50e4671208463432
 </script>  
 </body>
 </html>
