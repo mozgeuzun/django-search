@@ -1,6 +1,6 @@
 # project
 # Hello, this is my first Django project.
-
+I did this in one and a half week
 
 ## TECH
 
